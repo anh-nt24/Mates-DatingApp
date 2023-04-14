@@ -1,0 +1,89 @@
+.homepage-body {
+    background: var(--primary-bg-color);
+    background: var(--linear-bg-color);
+}
+
+.account-button {
+    color: #fff;
+    font-size: 17px;
+    padding: 10px;
+    border: none;
+    width: fit-content;
+    margin: auto;
+    font-weight: bold;
+    background-color: var(--primary-bg-color);
+    border-radius: 15px;
+}
+
+.account-button:hover {
+    background-color: var(--primary-bg-color--hover);
+}
+
+.model-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+}
+
+.description {
+    font-family: "Comic Sans MS";
+    font-size: 2.5rem;
+    color: #fff;
+    font-weight: bolder;
+    width: 100%;
+    text-shadow: 2px 2px #111;
+    text-align: center;
+}
+
+.hp-icon {
+    border-radius: 50px;
+    width: 100px;
+    height: 100px;
+    margin-top: 11.45833vw;
+    display: block;
+}
+.icon-as-img {
+    font-size: 7rem;
+    color: red;
+}
+
+.explore-heading {
+    padding-top: 10px;
+    font-size: 2rem;
+}
+
+.explore-desc {
+    color: #888;
+    width: 200px;
+    margin: auto;
+}
+
+.link-style-none {
+    color: #fff;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+
+.link-style-none:hover {
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+.nav-active {
+    text-decoration: underline;
+}
+
+.card-custom {
+    box-shadow: 5px 5px 5px rgb(218, 108, 108);
+    padding: 10px;
+    padding-top: 15px;
+    min-height: 355px;
+}
+
+.zoom {
+    transition: transform .5s ease;
+}
+
+.zoom:hover {
+    transform: scale(1.03);
+}
