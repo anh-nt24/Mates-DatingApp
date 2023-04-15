@@ -32,7 +32,7 @@ const About = ({authToken}) => {
         <>
             <Container style={{marginTop: "30px"}}>
                 <Row>
-                    <h2>This app</h2>
+                    <h2 className='mb-4'>This app</h2>
                     <Col className="text-center" lg="4" md="6">
                         <i className="icon-as-img fa fas fa-search"></i>
                         <h3 className='explore-heading'>Explore</h3>
@@ -54,9 +54,9 @@ const About = ({authToken}) => {
                 <hr />
                 <Row>
                     <h2>Developer</h2>
-                    <Col md="6" className='m-auto'>
-                        <div class="mt-3">
-                            <div class="card zoom" style={{boxShadow: "1px 1px 8px 0 grey"}}>
+                    <Col md="7" className='m-auto'>
+                        <div className="mt-3">
+                            <div className="card zoom" style={{boxShadow: "1px 1px 8px 0 grey"}}>
                                 <div className="card-body position-relative">
                                     <Icon className="fa fa-pen fa-xs edit"></Icon>
                                     <CardTable>
@@ -77,9 +77,9 @@ const About = ({authToken}) => {
                                                 <td>Vietnam</td>
                                             </tr>
                                             <tr>
-                                                <td>Interest research</td>
+                                                <td>Research interests</td>
                                                 <td>:</td>
-                                                <td>Computer vision, ML, Data</td>
+                                                <td>Computer vision, Machine Learning</td>
                                             </tr>
                                             <tr>
                                                 <td>Major</td>
@@ -89,7 +89,7 @@ const About = ({authToken}) => {
                                             <tr>
                                                 <td>Skill</td>
                                                 <td>:</td>
-                                                <td>Python, Javascript, Java</td>
+                                                <td>Python, Javascript, Java, Linux</td>
                                             </tr>
                                         </tbody>
                                     </CardTable>

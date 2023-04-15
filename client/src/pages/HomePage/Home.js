@@ -9,8 +9,8 @@ import Container from 'react-bootstrap/Container';
 
 const Home = ({authToken}) => {
 
-    const handleClick = () => {
-        console.log('clicked');
+    const navigateTo = () => {
+        window.location.replace('signup');
     }
     return (
         <>
@@ -23,7 +23,7 @@ const Home = ({authToken}) => {
                         </Col>
                     </Row>
                     <Row>
-                        <button className="account-button" onClick={handleClick}>
+                        <button className="account-button" onClick={navigateTo}>
                             {authToken ? 'Signout' : 'Create an account'}
                         </button>
                     </Row>
@@ -60,7 +60,7 @@ const Home = ({authToken}) => {
                             <div className="card card-custom zoom">
                                 <div className="px-2 d-flex justify-content-between">
                                     <h5 style={{marginBottom: "-5px"}}>Cristine and Robert</h5>
-                                    <i style={{fontSize: "1.5rem"}} class='fas fa-paperclip'></i>
+                                    <i style={{fontSize: "1.5rem"}} className='fas fa-paperclip'></i>
                                 </div>
                                 <hr />
                                 <p className='px-3'>I met my fiancé on Mates during the quarantine for COVID. She is from Lafayette, Indiana and I am from Cleveland, Ohio. We are both Christians who fell madly in love.</p>
@@ -70,7 +70,7 @@ const Home = ({authToken}) => {
                             <div className="card card-custom zoom">
                                 <div className="px-2 d-flex justify-content-between">
                                     <h5 style={{marginBottom: "-5px"}}>Jolie and James</h5>
-                                    <i style={{fontSize: "1.5rem"}} class='fas fa-paperclip'></i>
+                                    <i style={{fontSize: "1.5rem"}} className='fas fa-paperclip'></i>
                                 </div>
                                 <hr />
                                 <p className='px-3'>I was feeling lonely back in my hometown because most of my friends had started romantic relationships while I was abroad. We both decided to download Mates and see what happened. </p>
@@ -83,7 +83,7 @@ const Home = ({authToken}) => {
                             <div className="card card-custom zoom">
                                 <div className="px-2 d-flex justify-content-between">
                                     <h5 style={{marginBottom: "-5px"}}>Sean</h5>
-                                    <i style={{fontSize: "1.5rem"}} class='fas fa-paperclip'></i>
+                                    <i style={{fontSize: "1.5rem"}} className='fas fa-paperclip'></i>
                                 </div>
                                 <hr />
                                 <p className='px-3'>I was feeling lonely back in my hometown because most of my friends had started romantic relationships while I was abroad. We both decided to download Mates and see what happened.</p>
