@@ -1,5 +1,4 @@
 import NavBar from "../../components/NavBar";
-import Home from "../HomePage/Home";
 
 const HomePageLayout = ({authToken, children}) => {
     return (

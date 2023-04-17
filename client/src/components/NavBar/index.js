@@ -7,7 +7,7 @@ import LoginModal from '../Modals/Login';
 
 const Nav = styled.nav`
     width: 100%;
-    background-color: var(--primary-bg-color);
+    background-color: rgb(252,0,109);
 `;
 
 const LogoImg = styled.img`

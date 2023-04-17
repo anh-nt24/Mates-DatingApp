@@ -1,9 +1,3 @@
-import Button from 'react-bootstrap/Button';
-import logo from '../../images/love-icon.jpg';
-import model1 from '../../images/model1.webp';
-import model2 from '../../images/model2.jpg';
-import model3 from '../../images/model3.jpg';
-import model4 from '../../images/model4.jpg';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
@@ -24,10 +18,6 @@ const CardTable = styled.table`
 `;
 
 const About = ({authToken}) => {
-
-    const handleClick = () => {
-        console.log('clicked');
-    }
     return (
         <>
             <Container style={{marginTop: "30px"}}>

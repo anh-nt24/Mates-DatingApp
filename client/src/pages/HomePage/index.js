@@ -7,7 +7,7 @@ import {Routes, Route } from 'react-router-dom';
 const HomePage = () => {
     const authToken = false;
     return (
-        <HomePageLayout authToken={authToken}>
+        <HomePageLayout className='HomePage' authToken={authToken}>
             <Routes>
                 <Route index element={<Home />} />
                 <Route path='about' element={<About />} />

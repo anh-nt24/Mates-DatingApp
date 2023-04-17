@@ -1,8 +1,8 @@
-import './styles.css'
+import './styles.scss'
 const Styles = ({ children }) => {
-  return (
-    children
-  )
+    return (
+        children
+    )
 }
 
-export default Styles
+export default Styles;

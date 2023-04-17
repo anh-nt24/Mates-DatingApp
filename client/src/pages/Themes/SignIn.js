@@ -1,15 +1,17 @@
-import React from 'react'
-
+import React from 'react';
 
 const SignInLayout = ({ children }) => {
-  
-  return (
-    <div className='bg-homepage flex justify-center items-center bg-primary-color fixed top-0 bottom-0 left-0 right-0'>
-        <div className='m-auto'> 
-            {children}
+    return (
+        <div className='homepage-body'>
+            <div className="w-100 m-0 p-5 pb-0" style={{height: "100vh"}}>
+                <div className="login-container">
+                    <div className="wrap-login">
+                        {children}
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-  )
+    )
 }
 
 export default SignInLayout
