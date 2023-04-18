@@ -5,6 +5,8 @@ import About from './pages/HomePage/About';
 import SignUp from './pages/SignIn/SignUp';
 import Authentication from './components/Authentic';
 import Activity from './pages/Activity';
+import Explore from './pages/Activity/Explore/index';
+import Conversation from './pages/Activity/Conversation';
 
 const App = () => {
     return (
@@ -14,12 +16,12 @@ const App = () => {
                     <Route index element={<Home/> }></Route>
                     <Route path='about' element={<About />} />
                 </Route>
-                <Route element={Authentication}>
+                {/* <Route element={Authentication}> */}
                     <Route path="/activity/*" element={<Activity />}>
-                        {/* <Route index element={<ScheduleWeek />} />
-                        <Route path='storage' element={<Storage />} /> */}
+                        <Route index element={<Explore />} />
+                        <Route path='chat' element={<Conversation />} />
                     </Route>
-                </Route>
+                {/* </Route> */}
                 <Route path="/signup" element={<SignUp />} />
             </Routes>
         </BrowserRouter>

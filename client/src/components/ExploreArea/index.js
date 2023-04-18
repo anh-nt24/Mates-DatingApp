@@ -1,0 +1,19 @@
+import TinderCard from 'react-tinder-card'
+
+const ExploreArea = () => {
+    const onSwipe = (direction) => {
+        console.log('You swiped: ' + direction)
+    }
+    
+    const onCardLeftScreen = (myIdentifier) => {
+        console.log(myIdentifier + ' left the screen')
+    }
+    
+    return (
+        <TinderCard onSwipe={onSwipe} onCardLeftScreen={() => onCardLeftScreen('fooBar')} preventSwipe={['right', 'left']}>
+            
+        </TinderCard>
+    )
+}
+
+export default ExploreArea;

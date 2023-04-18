@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import LoginModal from '../Modals/Login';
+import avatar from '../../images/model2.jpg';
 
 const Nav = styled.nav`
     width: 100%;
@@ -44,13 +45,32 @@ const NavBar = ({authToken}) => {
                 <div>
                     <LogoImg src={logo} alt="" />
                 </div>
-                <div className='me-auto ms-4'>
-                    <NavLink to='/' className={({ isActive }) => isActive ? 'mx-3 nav-active link-style-none' : 'text-muted mx-3 link-style-none'}>Home</NavLink>
-                    <NavLink to='/about' className={({ isActive }) => isActive ? 'mx-3 nav-active link-style-none' : 'text-muted mx-3 link-style-none'}>About</NavLink>
-                </div>
+                {
+                    !authToken &&
+                    <div className='me-auto ms-4'>
+                        <NavLink to='/' className={({ isActive }) => isActive ? 'mx-3 nav-active link-style-none' : 'text-muted mx-3 link-style-none'}>Home</NavLink>
+                        <NavLink to='/about' className={({ isActive }) => isActive ? 'mx-3 nav-active link-style-none' : 'text-muted mx-3 link-style-none'}>About</NavLink>
+                    </div>
+                }
+                {
+                    authToken &&
+                    <div className='me-auto ms-4'>
+                        <NavLink to='explore' className={({ isActive }) => isActive ? 'mx-3 nav-active link-style-none' : 'text-muted mx-3 link-style-none'}>Explore</NavLink>
+                        <NavLink to='chat' className={({ isActive }) => isActive ? 'mx-3 nav-active link-style-none' : 'text-muted mx-3 link-style-none'}>Message</NavLink>
+                    </div>
+                }
                 <div>
-                    <Language className='btn pe-3'><i className="fa fa-thin fa-language"></i></Language>
-                    {!authToken && <LoginButton onClick={handleClick} className='btn'>Log in</LoginButton>}
+                    {
+                        !authToken &&
+                        <Language className='btn pe-3'><i className="fa fa-thin fa-language"></i></Language> &&
+                        <LoginButton onClick={handleClick} className='btn'>Log in</LoginButton>
+                    }
+                    {
+                        authToken && 
+                        <div onClick={handleClick}>
+                            <img width={"50px"} style={{borderRadius: "50px"}} src={avatar} alt="" />
+                        </div>
+                    }
                 </div>
             </Container>
 
