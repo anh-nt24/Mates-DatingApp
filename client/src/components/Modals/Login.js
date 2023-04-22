@@ -1,11 +1,38 @@
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import GoogleLogin from 'react-google-login'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { UserLogin } from '../../api/UserApi';
 
 const Login = ({isOpened, setOpenning}) => {
     const handleClose = () => {
         setOpenning(false);
+    }
+    const config = {
+        'username': '',
+        'password': '',
+    }
+    let navigate = useNavigate()
+
+    const [form, setForm] = useState(config)
+
+    const handleChange = (e) => {
+        const {value, name} = e.target
+        setForm(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const response = await UserLogin(form);
+        const success = response['status'];
+        if (success) {
+            navigate('/activity')
+        }
+
     }
     return (
         <Modal show={isOpened} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" centered>
@@ -13,24 +40,24 @@ const Login = ({isOpened, setOpenning}) => {
                 <Modal.Title>Login</Modal.Title>
             </Modal.Header>
                 <Modal.Body>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <div className="form-group">
                             <label htmlFor="inputUserName">Username</label>
-                            <input className="form-control mt-2" placeholder="Enter username" type="text" id="inputUserName" />
+                            <input onChange={handleChange} name="username" value={form.username} className="form-control mt-2" placeholder="Enter username" type="text" id="inputUserName" />
                         </div>
                         <div className="mt-3 form-group">
                             <label htmlFor="inputPassword">Password:</label>
-                            <input className="form-control mt-2" placeholder="Enter password" type="password" id="inputPassword" />
+                            <input onChange={handleChange} name="password" value={form.password} className="form-control mt-2" placeholder="Enter password" type="password" id="inputPassword" />
                         </div>
                         <div className='w-100 p-1 mt-3'>
-                            <Button variant="primary" className=" w-100 m-auto account-button" onClick={handleClose}>
+                            <Button type='submit' variant="primary" className=" w-100 m-auto account-button">
                                 Login
                             </Button>
                         </div>
-                        <div class="striped">
-                            <span class="striped-line"></span>
-                            <span class="striped-text">Or</span>
-                            <span class="striped-line"></span>
+                        <div className="striped">
+                            <span className="striped-line"></span>
+                            <span className="striped-text">Or</span>
+                            <span className="striped-line"></span>
                         </div>
                         <div className="d-flex justify-content-center">
                             <button type="button" className="google-button text-center btn">
