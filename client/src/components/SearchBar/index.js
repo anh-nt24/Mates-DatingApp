@@ -11,7 +11,7 @@ const SearchBar = () => {
         setUpload();
     }
     return (
-        <div className="my-2 mx-auto">
+        <div className="my-2 mx-auto Search">
             <Container className='sign-up'>
                 <Row>
                     <Col md="4" sm="8" className="mb-3 mb-md-0 mb-sm-3 mx-auto">

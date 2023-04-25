@@ -9,7 +9,8 @@ const Activity = () => {
         <>
             <ActivityLayout className="Activity">
                 <Routes>
-                    <Route index path='explore' element={<Explore />} />
+                    <Route index element={<Explore />} />
+                    <Route path='/explore' element={<Explore />} />
                     <Route path='chat' element={<Conversation />} />
                 </Routes>
             </ActivityLayout>

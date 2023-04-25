@@ -35,10 +35,11 @@ const SignUp = () => {
     const config = {
         'firstname': '',
         'password': '',
-        'email': '',
+        'phone': '',
         'dob_M': '',
         'dob_D': '',
         'dob_Y': '',
+        'about': '',
         'gender': 'male',
         'gendered_interest': 'male',
         'avatar': [],
@@ -60,7 +61,7 @@ const SignUp = () => {
     return (
         <SignInLayout>
             <h2 className="text-center py-3 fw-bold" style={{fontFamily: "Comic Sans MS"}}>CREATE AN ACCOUNT</h2>
-            <Form action="" className="mt-lg-5 mt-md-3">
+            <Form action="" className="mt-lg-4 mt-md-2">
                 <Container  className="sign-up">
                     <Row className="m-auto mt-4">
                         <Col md="6">
@@ -72,10 +73,10 @@ const SignUp = () => {
                                 </InputGroup>
                             </div>
                             <div>
-                                <h6>Email address</h6>
+                                <h6>Phone number</h6>
                                 <InputGroup className="mb-3 w-75">
-                                    <InputGroup.Text><i className="fa fa-envelope"></i></InputGroup.Text>
-                                    <Form.Control onChange={handleChange} name="email" className="form-control-custom" type="email" placeholder="Enter your email" required />
+                                    <InputGroup.Text><i className="fa fa-phone"></i></InputGroup.Text>
+                                    <Form.Control onChange={handleChange} name="phone" className="form-control-custom" type="number" placeholder="Enter your phone number" required />
                                 </InputGroup>
                             </div>
                             <div>
@@ -92,6 +93,10 @@ const SignUp = () => {
                                     <Form.Control onChange={handleChange} name="dob_D" className="form-control-custom mx-2" placeholder="DD" type="number" required />
                                     <Form.Control onChange={handleChange} name="dob_Y" className="form-control-custom mx-2" placeholder="YYYY" type="number" required />
                                 </InputGroup>
+                            </div>
+                            <div>
+                                <h6>About you</h6>
+                                <textarea onChange={handleChange} name="about" style={{width: "75%"}}></textarea>
                             </div>
                         </Col>
                         <Col md="6">
@@ -178,11 +183,12 @@ const SignUp = () => {
                                 </Container>
                             </div>
                         </Col>
-                        <Col>
+                    </Row>
+                    <Row>
+                        <Col className="my-3">
                             <button onClick={handleSubmit} className="account-button w-25">
                                 Submit
                             </button>
-                        
                         </Col>
                     </Row>
                 </Container>
