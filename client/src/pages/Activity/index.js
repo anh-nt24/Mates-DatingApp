@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Conversation from './Conversation'
 import Explore from './Explore'
-import ActivityLayout from '../Themes/Activity'
+import ActivityLayout from '../../layouts/Activity'
 
 const Activity = () => {
     return (

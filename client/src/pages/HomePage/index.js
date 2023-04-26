@@ -1,4 +1,4 @@
-import HomePageLayout from "../Themes/HomePage";
+import HomePageLayout from "../../layouts/HomePage";
 import Home from "./Home";
 import About from "./About";
 import {Routes, Route } from 'react-router-dom';

@@ -32,7 +32,6 @@ const Login = ({isOpened, setOpenning}) => {
         if (success) {
             navigate('/activity')
         }
-
     }
     return (
         <Modal show={isOpened} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" centered>

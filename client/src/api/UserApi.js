@@ -16,3 +16,16 @@ export const UserLogin = async (form) => {
     const { data } = await axios(config)
     return data
 }
+
+export const UserSignUp = async (form) => {
+    const config = {
+        method: 'POST',
+        url: 'http://localhost:5000/signup',
+        data: form,
+        headers: {
+            'Content-Type': 'application/json; charset=utf-8'
+        }
+    }
+    const { data } = await axios(config)
+    return  data
+}

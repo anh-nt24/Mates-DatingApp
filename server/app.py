@@ -10,5 +10,6 @@ CORS(app)
 
 api = Api(app)
 api.add_resource(User.Login, '/login')
+api.add_resource(User.SignUp, '/signup')
 if __name__ == '__main__':
     app.run(debug = True)
