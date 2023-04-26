@@ -7,6 +7,7 @@ import Authentication from './components/Authentic';
 import Activity from './pages/Activity';
 import Explore from './pages/Activity/Explore/index';
 import Conversation from './pages/Activity/Conversation';
+import Profile from './pages/Profile';
 
 const App = () => {
     return (
@@ -17,6 +18,7 @@ const App = () => {
                     <Route path='about' element={<About />} />
                 </Route>
                 {/* <Route element={Authentication}> */}
+                    <Route path='/profile' element={<Profile />}></Route>
                     <Route path="/activity/*" element={<Activity />}>
                         <Route index element={<Explore />} />
                         <Route path='chat' element={<Conversation />} />

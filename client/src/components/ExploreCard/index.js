@@ -45,7 +45,6 @@ const ExploreCard = () => {
     const outOfFrame = (name) => {
         console.log(name + ' left the screen!')
     }
-    console.log(users);
     return (
         <Row className='mt-lg-4 mt-md-3'>
             <Col lg="3" md="4" className="m-auto swipe-container">
@@ -57,9 +56,9 @@ const ExploreCard = () => {
                                 <h3>{user.name}, {user.age}</h3>
                                 <span><i className='fas fa-map-marker-alt'style={{color: "#fff"}}></i> 20m</span>
                         </div>
-                        <div className='mt-2 d-flex justify-content-around'>
-                            <button className='btn card-option'><i class="fa fa-times-circle" ></i></button>
-                            <button className='btn card-option'><i className="fa fa-heart" style={{color: "red"}}></i></button>
+                        <div className='mt-2 d-flex justify-content-center'>
+                            <button className='btn card-option mx-2'><i className="fa fa-times-circle" ></i></button>
+                            <button className='btn card-option mx-2'><i className="fa fa-heart" style={{color: "red"}}></i></button>
                             {/* <button className='btn card-option'>hi</button> */}
                         </div>
                     </TinderCard>

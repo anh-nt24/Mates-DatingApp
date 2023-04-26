@@ -23,7 +23,7 @@ export const UserSignUp = async (form) => {
         url: 'http://localhost:5000/signup',
         data: form,
         headers: {
-            'Content-Type': 'application/json; charset=utf-8'
+            'Content-Type': 'multipart/form-data'
         }
     }
     const { data } = await axios(config)
