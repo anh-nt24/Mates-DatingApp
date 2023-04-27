@@ -31,14 +31,8 @@ export const UserSignUp = async (form) => {
 }
 
 export const GetUserInfo = async (id) => {
-    const config = {
-        method: 'POST',
-        url: 'http://localhost:5000/activity',
-        data: {id},
-        headers: {
-            'Content-Type': 'application/json; charset=utf-8'
-        }
-    }
-    const { data } = await axios(config)
-    return  data
+    const { data } = await axios.get('http://localhost:5000/getinfo', {
+        params: {id}
+    })
+    return data
 }

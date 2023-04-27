@@ -12,6 +12,7 @@ app.config['SECRET_KEY'] = 'theanhdeptrai'
 api = Api(app)
 api.add_resource(UserApi.Login, '/login')
 api.add_resource(UserApi.SignUp, '/signup')
-api.add_resource(UserApi.GetUserInfo, '/activity')
+api.add_resource(UserApi.GetUserInfo, '/getinfo')
+api.add_resource(UserApi.GetUserImage, '/images/<string:owner>/<string:img_url>')
 if __name__ == '__main__':
     app.run(debug = True)

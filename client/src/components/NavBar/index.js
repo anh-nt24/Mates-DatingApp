@@ -54,7 +54,11 @@ const NavBar = ({authToken}) => {
                 if (response.status === 200) {
                     const data = response.response;
                     setName(data.name);
-                    const imageUrl = data.image
+                    fetch(data.image)
+                        .then((response) => response.blob())
+                            .then((data) => {
+                                setAvatar(URL.createObjectURL(data));
+                            });
                 }
             }
             getUserData();
@@ -95,7 +99,7 @@ const NavBar = ({authToken}) => {
                     {
                         authToken && 
                         <div onClick={handleClick}>
-                            <img width={"50px"} style={{borderRadius: "50px"}} src={avatar ? avatar : blankProfile} alt="" />
+                            <img width={"50px"} height={"50px"} style={{borderRadius: "50px"}} src={avatar ? avatar : blankProfile} alt="" />
                             <Username>{ name }</Username>
                         </div>
                     }

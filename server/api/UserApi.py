@@ -1,6 +1,6 @@
 from flask_restful import Resource
 from flask_restful import request
-from flask import jsonify
+from flask import send_file, make_response, jsonify
 from api import database
 from werkzeug.utils import secure_filename
 import json
@@ -115,20 +115,38 @@ class SignUp(Resource):
             }
 
 class GetUserInfo(Resource):
-    def post(self):
-        id = request.json['id']
+    def get(self):
+        arg = request.args
+        id = arg['id']
 
         connection = database.connect()
         user_collect = connection['user']
         data = user_collect.find_one({'_id': ObjectId(id)}, {'image': 1, 'name': 1, '_id': 0})
         if data:
-            data['image'] = data['image'][0]
+            img_path = "http://localhost:5000/" + data['image'][0][2:]
+            data['image'] = img_path
             return {
                 'status': 200,
-                'response': data
+                'response': data,
             }
 
         return {
             'status': 404,
             'message': 'Data not found'
         }
+
+class GetUserImage(Resource):
+    def get(self, owner, img_url):
+        filepath = f'./images/{owner}/{img_url}'
+        if not os.path.exists(filepath):
+            return {
+                'status': 404,
+                'message': 'Data not found'
+            }
+        try:
+            return send_file(filepath, mimetype='image/png')
+        except Exception as e:
+            return {
+                'status': 500,
+                'message': e
+            }
