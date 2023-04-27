@@ -123,7 +123,7 @@ class GetUserInfo(Resource):
         user_collect = connection['user']
         data = user_collect.find_one({'_id': ObjectId(id)}, {'image': 1, 'name': 1, '_id': 0})
         if data:
-            img_path = "http://localhost:5000/" + data['image'][0][2:]
+            img_path = "http://localhost:5000/" + data['image'][0]
             data['image'] = img_path
             return {
                 'status': 200,
