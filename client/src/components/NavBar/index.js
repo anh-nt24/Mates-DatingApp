@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 import logo from '../../images/logo.png';
 import Container from 'react-bootstrap/Container';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import LoginModal from '../Modals/Login';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { GetUserInfo } from '../../api/UserApi';
 import blankProfile from '../../images/blank-profile.webp';
+import { useCookies } from 'react-cookie';
 
 const Nav = styled.nav`
     width: 100%;
@@ -70,6 +71,14 @@ const NavBar = ({authToken}) => {
     const handleClick = () => {
         setOpenning(true);
     }
+
+    const [cookie, setCookie, removeCookie] = useCookies();
+    let navigate = useNavigate();
+    const handleLogout = () => {
+        setCookie('token', '');
+        navigate('/');
+
+    }
     return (
         <Nav>
             <Container className='d-flex justify-content-between align-items-center'>
@@ -98,7 +107,7 @@ const NavBar = ({authToken}) => {
                     }
                     {
                         authToken && 
-                        <div onClick={handleClick}>
+                        <div onClick={handleLogout} style={{pointer: "cursor"}}>
                             <img width={"50px"} height={"50px"} style={{borderRadius: "50px"}} src={avatar ? avatar : blankProfile} alt="" />
                             <Username>{ name }</Username>
                         </div>

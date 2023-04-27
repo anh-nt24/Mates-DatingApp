@@ -7,7 +7,7 @@ import json
 import os
 from bson.objectid import ObjectId
 
-from utils import get_hashed_password
+from utils import *
 
 
 class Login(Resource):
@@ -101,7 +101,8 @@ class SignUp(Resource):
                 'gender_interest': data['gendered_interest'],
                 'image': avt,
                 'friend': [],
-                'bio': data['about']
+                'bio': data['about'],
+                'latlng': get_lat_lng()
             })
             id = str(query.inserted_id)
             return {

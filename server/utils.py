@@ -1,4 +1,5 @@
 import hashlib
+import geocoder
 
 def get_hashed_password(pwd):
     salt = "theanhdeptrailam"
@@ -6,8 +7,10 @@ def get_hashed_password(pwd):
     h_pwd = hashlib.md5(new_pwd.encode())
     return h_pwd.hexdigest()
 
-import zlib
-import base64
+def get_lat_lng():
+    g = geocoder.ip('me')
+    return g.latlng
+
 
 
 if __name__ == '__main__':
