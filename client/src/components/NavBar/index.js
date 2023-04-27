@@ -4,7 +4,9 @@ import Container from 'react-bootstrap/Container';
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import LoginModal from '../Modals/Login';
-import avatar from '../../images/model2.jpg';
+import axios from 'axios';
+import { useEffect } from 'react';
+import { GetUserInfo } from '../../api/UserApi';
 
 const Nav = styled.nav`
     width: 100%;
@@ -34,7 +36,31 @@ const LoginButton = styled.button`
     }
 `;
 
+const Username = styled.span`
+    color: #fff;
+    font-size: 1.3rem;
+    padding-left: 7px;
+    font-weight: bolder;
+`;
+
 const NavBar = ({authToken}) => {
+    const [name, setName] = useState();
+    const [avatar, setAvatar] = useState();
+    useEffect(() => {
+        if (authToken) {
+            const getUserData = async () => {
+                const response = await GetUserInfo(authToken)
+                if (response.status === 200) {
+                    const data = response.response;
+                    setName(data.name);
+                    const imageUrl = data.image
+                }
+            }
+            getUserData();
+        }
+    }, []);
+
+
     const [isOpened, setOpenning] = useState(false);
     const handleClick = () => {
         setOpenning(true);
@@ -55,7 +81,7 @@ const NavBar = ({authToken}) => {
                 {
                     authToken &&
                     <div className='me-auto ms-4'>
-                        <NavLink to='explore' className={({ isActive }) => isActive ? 'mx-3 nav-active link-style-none' : 'text-muted mx-3 link-style-none'}>Explore</NavLink>
+                        <NavLink to='/activity/' className={({ isActive }) => isActive ? 'mx-3 nav-active link-style-none' : 'text-muted mx-3 link-style-none'}>Explore</NavLink>
                         <NavLink to='chat' className={({ isActive }) => isActive ? 'mx-3 nav-active link-style-none' : 'text-muted mx-3 link-style-none'}>Message</NavLink>
                     </div>
                 }
@@ -68,7 +94,8 @@ const NavBar = ({authToken}) => {
                     {
                         authToken && 
                         <div onClick={handleClick}>
-                            <img width={"50px"} style={{borderRadius: "50px"}} src={avatar} alt="" />
+                            <img width={"50px"} style={{borderRadius: "50px"}} src="" alt="" />
+                            <Username>{ }</Username>
                         </div>
                     }
                 </div>

@@ -5,7 +5,10 @@ from api import database
 from werkzeug.utils import secure_filename
 import json
 import os
+from bson.objectid import ObjectId
+
 from utils import get_hashed_password
+
 
 class Login(Resource):
     def post(self):
@@ -15,16 +18,16 @@ class Login(Resource):
         result = user_collect.find_one({
             'username': data['username'],
             'password': data['password']
-        })
+        }, {'_id': 1})
         if result:
             return {
                     'status': 200,
-                    'role': 'user'
+                    'id': str(result['_id'])
                 }
         
         return {
             'status': 404,
-            'role': None,
+            'id': None,
             'message': 'Information not found'
         }
 
@@ -79,7 +82,7 @@ class SignUp(Resource):
                 filename = secure_filename(file.filename)
                 filepath = os.path.join(user_path, filename)
                 file.save(filepath)
-                avt.append(filepath)
+                avt.append(filepath[2:])
             else:
                 return {
                     'status': 400,
@@ -110,3 +113,22 @@ class SignUp(Resource):
                 'status': 500,
                 'message': 'Something went wrong'
             }
+
+class GetUserInfo(Resource):
+    def post(self):
+        id = request.json['id']
+
+        connection = database.connect()
+        user_collect = connection['user']
+        data = user_collect.find_one({'_id': ObjectId(id)}, {'image': 1, 'name': 1, '_id': 0})
+        if data:
+            data['image'] = data['image'][0]
+            return {
+                'status': 200,
+                'response': data
+            }
+
+        return {
+            'status': 404,
+            'message': 'Data not found'
+        }

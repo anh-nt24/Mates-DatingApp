@@ -4,8 +4,10 @@ import GoogleLogin from 'react-google-login'
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { UserLogin } from '../../api/UserApi';
+import { useCookies } from 'react-cookie';
 
 const Login = ({isOpened, setOpenning}) => {
+    const [cookie, setCookie] = useCookies(null);
     const handleClose = () => {
         setOpenning(false);
     }
@@ -29,7 +31,8 @@ const Login = ({isOpened, setOpenning}) => {
         e.preventDefault();
         const response = await UserLogin(form);
         const success = response['status'];
-        if (success) {
+        if (success === 200) {
+            setCookie('token', response.id)
             navigate('/activity')
         }
     }

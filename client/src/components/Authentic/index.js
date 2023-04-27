@@ -2,8 +2,8 @@ import { useCookies } from 'react-cookie'
 import { Outlet, Navigate } from 'react-router-dom'
 
 function Authentication() {
-	const [cookies] = useCookies('access_token')
-	if (cookies.access_token) {
+	const [cookies] = useCookies('token')
+	if (cookies.token) {
 		return <Outlet />
 	}
 	console.log(cookies.access_token);

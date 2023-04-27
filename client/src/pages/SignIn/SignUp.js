@@ -122,8 +122,8 @@ const SignUp = () => {
         }
         form.append('data', JSON.stringify(getForm));
         const response = await UserSignUp(form);
-        setCookie('userId', response['id']);
-        navigate('/activity')
+        setCookie('token', response['id']);
+        navigate('/activity/')
     }
     return (
         <SignInLayout>
