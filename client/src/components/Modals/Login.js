@@ -33,7 +33,7 @@ const Login = ({isOpened, setOpenning}) => {
         const success = response['status'];
         if (success === 200) {
             setCookie('token', response.id)
-            navigate('/activity')
+            navigate('/activity/')
         }
     }
     return (

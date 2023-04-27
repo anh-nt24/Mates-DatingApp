@@ -7,6 +7,7 @@ import LoginModal from '../Modals/Login';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { GetUserInfo } from '../../api/UserApi';
+import blankProfile from '../../images/blank-profile.webp';
 
 const Nav = styled.nav`
     width: 100%;
@@ -94,8 +95,8 @@ const NavBar = ({authToken}) => {
                     {
                         authToken && 
                         <div onClick={handleClick}>
-                            <img width={"50px"} style={{borderRadius: "50px"}} src="" alt="" />
-                            <Username>{ }</Username>
+                            <img width={"50px"} style={{borderRadius: "50px"}} src={avatar ? avatar : blankProfile} alt="" />
+                            <Username>{ name }</Username>
                         </div>
                     }
                 </div>
