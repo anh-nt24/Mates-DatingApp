@@ -105,13 +105,11 @@ class SignUp(Resource):
             })
             id = str(query.inserted_id)
             cbir.add_user(data['username'])
-            print('return')
             return {
                 'status': 200,
                 'id': id
             }
         except Exception as e:
-            print(e)
             return {
                 'status': 500,
                 'message': e
