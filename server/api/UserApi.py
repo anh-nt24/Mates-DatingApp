@@ -6,9 +6,8 @@ from werkzeug.utils import secure_filename
 import json
 import os
 from bson.objectid import ObjectId
-
+from retrieval.Retrieval import Retrieval
 from utils import *
-
 
 class Login(Resource):
     def post(self):
@@ -17,7 +16,7 @@ class Login(Resource):
         data = request.json
         result = user_collect.find_one({
             'username': data['username'],
-            'password': data['password']
+            'password': get_hashed_password(data['password'])
         }, {'_id': 1})
         if result:
             return {
@@ -54,6 +53,7 @@ class SignUp(Resource):
         }
 
     def post(self):
+        cbir = Retrieval()
         connection = database.connect()
 
         if 'files[]' not in request.files:
@@ -65,7 +65,7 @@ class SignUp(Resource):
         req = request.files
         data = json.loads(request.form['data'])
         images = req.getlist('files[]')
-        UPLOAD_FOLDER = './images/'
+        UPLOAD_FOLDER = './upload/'
 
         if os.path.exists(UPLOAD_FOLDER + data['username']):
             return {
@@ -88,7 +88,6 @@ class SignUp(Resource):
                     'status': 400,
                     'message': 'Bad request'
                 }
-        
         user_collect = connection['user']
         try:
             query = user_collect.insert_one({
@@ -105,14 +104,17 @@ class SignUp(Resource):
                 'latlng': get_lat_lng()
             })
             id = str(query.inserted_id)
+            cbir.add_user(data['username'])
+            print('return')
             return {
                 'status': 200,
                 'id': id
             }
-        except:
+        except Exception as e:
+            print(e)
             return {
                 'status': 500,
-                'message': 'Something went wrong'
+                'message': e
             }
 
 class GetUserInfo(Resource):
@@ -123,6 +125,7 @@ class GetUserInfo(Resource):
         connection = database.connect()
         user_collect = connection['user']
         data = user_collect.find_one({'_id': ObjectId(id)}, {'image': 1, 'name': 1, '_id': 0})
+        
         if data:
             img_path = "http://localhost:5000/" + data['image'][0]
             data['image'] = img_path
@@ -138,7 +141,7 @@ class GetUserInfo(Resource):
 
 class GetUserImage(Resource):
     def get(self, owner, img_url):
-        filepath = f'./images/{owner}/{img_url}'
+        filepath = f'./upload/{owner}/{img_url}'
         if not os.path.exists(filepath):
             return {
                 'status': 404,
@@ -151,3 +154,4 @@ class GetUserImage(Resource):
                 'status': 500,
                 'message': e
             }
+        

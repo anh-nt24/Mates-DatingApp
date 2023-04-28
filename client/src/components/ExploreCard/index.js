@@ -3,6 +3,10 @@ import { useState } from 'react'
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
 import styled from 'styled-components';
+import { useEffect } from 'react';
+import { useCookies } from 'react-cookie';
+import { GetUserInfo } from '../../api/UserApi';
+import { GetNearestUsers } from '../../api/ActivityApi';
 
 const users = [
     {
@@ -35,6 +39,7 @@ const users = [
 
 
 const ExploreCard = () => {
+    const [token, setToken] = useCookies();
     const [lastDirection, setLastDirection] = useState()
 
     const swiped = (direction, nameToDelete) => {
@@ -45,6 +50,18 @@ const ExploreCard = () => {
     const outOfFrame = (name) => {
         console.log(name + ' left the screen!')
     }
+
+    useEffect(() => {
+        const getUsers = async () => {
+            // const response = await GetNearestUsers(token.token)
+            // console.log(response)
+            // if (response.status === 200) {
+            //     const data = response.response;
+            //     console.log(data)
+            // }
+        }
+        getUsers();
+    }, []);;
     return (
         <Row className='mt-lg-4 mt-md-3'>
             <Col lg="3" md="4" className="m-auto swipe-container">
@@ -59,7 +76,6 @@ const ExploreCard = () => {
                         <div className='mt-2 d-flex justify-content-center'>
                             <button className='btn card-option mx-2'><i className="fa fa-times-circle" ></i></button>
                             <button className='btn card-option mx-2'><i className="fa fa-heart" style={{color: "red"}}></i></button>
-                            {/* <button className='btn card-option'>hi</button> */}
                         </div>
                     </TinderCard>
                 )}
