@@ -22,7 +22,6 @@ class Retrieval:
             vectors = pickle.load(f)
         with open(self.paths_file, 'rb') as f:
             paths = pickle.load(f)
-        print(paths)
         distance = np.linalg.norm(img_vector - vectors, axis=1)
         idx = np.argsort(distance)
         neighbors = {paths[i]: round(1-distance[i],4) for i in idx}

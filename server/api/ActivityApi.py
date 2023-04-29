@@ -3,6 +3,9 @@ from flask_restful import request
 from flask import send_file, make_response, jsonify
 from api import database
 from bson.objectid import ObjectId
+import os
+from werkzeug.utils import secure_filename
+from retrieval.Retrieval import Retrieval
 
 from utils import *
 
@@ -56,3 +59,63 @@ class GetNearest(Resource):
             'status': 200,
             'response': closest_users
         }
+    
+class GetSimilar(Resource):
+    def post(self):
+        image = request.files['file']
+
+        tmp_folder = './tmp_folder'
+
+        if os.path.exists(tmp_folder):
+            for f in os.listdir(tmp_folder):
+                os.remove(os.path.join(tmp_folder, f))
+            os.rmdir(tmp_folder)
+        os.mkdir(tmp_folder)
+        if image:
+            filename = secure_filename(image.filename)
+            filepath = os.path.join(tmp_folder, filename)
+            image.save(filepath)
+        else:
+            return {
+                'status': 400,
+                'message': 'Bad request'
+            }
+        
+        try:
+            connection = database.connect()
+            user_collect = connection['user']
+            cbir = Retrieval()
+            neighbors = cbir.query(filepath)
+            users = {}
+            for i in neighbors:
+                uname = i.split('/')[1]
+                if uname in users:
+                    if users[uname][1] < neighbors[i]:
+                        users[uname] = (i, neighbors[i])
+                else:
+                    users[uname] = (i, neighbors[i])
+            data = []
+            for i in users.keys():
+                result = user_collect.find_one({
+                    'username': i
+                }, {'_id': 0, 'password': 0})
+                result['similar'] = f'{round(100*max(users[i][1], 0),2)} %'
+                try:
+                    result['nearest'] = result['image'].index(users[i][0])
+                except:
+                    result['nearest'] = 0
+                data.append(result)
+            if result:
+                return {
+                        'status': 200,
+                        'response': data
+                    }
+            return {
+                'status': 404,
+                'message': 'Information not found'
+            }
+        except Exception as e:
+            return {
+                'status': 500,
+                'message': e
+            }
