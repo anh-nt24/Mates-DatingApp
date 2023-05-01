@@ -82,7 +82,7 @@ With these features, this impressive web app is making online dating safer, fast
         - After running the command `npm install`, make sure that all the libraries/packages have been successfully installed, otherwise an error will occur (you can check the libraries listed in the 'package.json' file).
         - Open the terminal at the client folder, run the command `npm start` and wait a few seconds to connect. When the connection is successful, the web page will be displayed automatically at localhost 3000. If not, you can manually enter the url in the browser: 'localhost:3000'.
 
-## Tools I used
+## 🔨 Tools I used
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/<username>/<repository>/blob/main/<file>.ipynb)
 
