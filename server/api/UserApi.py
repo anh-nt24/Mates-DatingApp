@@ -18,10 +18,12 @@ class Login(Resource):
             'username': data['username'],
             'password': get_hashed_password(data['password'])
         }, {'_id': 1})
+        id = str(result['_id'])
+        token = create_jwt_token(id)
         if result:
             return {
                     'status': 200,
-                    'id': str(result['_id'])
+                    'id': token
                 }
         
         return {
@@ -104,10 +106,11 @@ class SignUp(Resource):
                 'latlng': get_lat_lng()
             })
             id = str(query.inserted_id)
+            token = create_jwt_token(id)
             cbir.add_user(data['username'])
             return {
                 'status': 200,
-                'id': id
+                'id': token
             }
         except Exception as e:
             return {
@@ -118,7 +121,8 @@ class SignUp(Resource):
 class GetUserInfo(Resource):
     def get(self):
         arg = request.args
-        id = arg['id']
+        token = arg['id']
+        id = decode_jwt_token(token)
 
         connection = database.connect()
         user_collect = connection['user']

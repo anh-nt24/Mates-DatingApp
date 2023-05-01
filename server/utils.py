@@ -1,10 +1,12 @@
 import hashlib
 import geocoder
 import math
-from datetime import datetime
+import datetime
+import jwt
+from config import *
 
 def get_hashed_password(pwd):
-    salt = "theanhdeptrailam"
+    salt = app.config.get('SALT')
     new_pwd = salt + pwd + salt
     h_pwd = hashlib.md5(new_pwd.encode())
     return h_pwd.hexdigest()
@@ -60,11 +62,34 @@ def get_closest_users(target, locations):
     return distances
 
 def get_age(dob):
-    dob = datetime.strptime(dob, '%m/%d/%Y')
-    today = datetime.today()
+    dob = datetime.datetime.strptime(dob, '%m/%d/%Y')
+    today = datetime.datetime.today()
     age = today.year - dob.year - ((today.month, today.day) < (dob.month, dob.day))
     return age
 
+def create_jwt_token(id):
+    try:
+        payload = {
+            'expires': (datetime.datetime.utcnow() + datetime.timedelta(days=3)).strftime('%Y-%m-%dT%H:%M:%S.%fZ'),
+            'created': datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S.%fZ'),
+            'id': id
+        }
+        return jwt.encode(
+            payload,
+            app.config.get('SECRET_KEY'),
+            algorithm="HS256"
+        )
+    except Exception as e:
+        return e
+
+def decode_jwt_token(token):
+    try:
+        payload = jwt.decode(token, app.config.get('SECRET_KEY'), algorithms=['HS256'])
+        return payload.get('id')
+    except jwt.ExpiredSignatureError:
+        return 'Signature expired. Please log in again.'
+    except Exception as e:
+        return e
 
 if __name__ == '__main__':
     # testcases
@@ -79,6 +104,10 @@ if __name__ == '__main__':
     # ds = get_closest_users(target, locations)
     # print(ds)
 
-    print(get_age('05/01/2003'))
+    # print(get_age('05/01/2003'))
+    token = encode_jwt_token('12')
+    print(token)
+    id = decode_jwt_token(token)
+    print(id)
 
 

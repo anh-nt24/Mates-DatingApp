@@ -12,7 +12,8 @@ from utils import *
 class GetNearest(Resource):
     def get(self):
         arg = request.args
-        id = arg['id']
+        token = arg['id']
+        id = decode_jwt_token(token)
 
         connection = database.connect()
         user_collect = connection['user']
